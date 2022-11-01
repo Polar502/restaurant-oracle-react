@@ -1,10 +1,13 @@
 const express = require('express')
 const oracledb = require('oracledb')
+const cors = require('cors')
 const app = express()
 const PORT = 5000
 
+app.use(cors())
+
 app.get('/', (req, res) => {
-  res.send('Hello')
+  res.send('Hola Home')
 })
 
 app.get('/customers', (req, res) => {
@@ -13,21 +16,23 @@ app.get('/customers', (req, res) => {
       const connection = await oracledb.getConnection({
         user: 'C##RESTAURANTDB',
         password: 'hola2022',
-        connectString : '192.168.194.45:1521/xe',
+        connectString: '192.168.194.45:1521/xe',
       })
 
       const result = await connection.execute('SELECT * FROM customers')
-      return result
+      return result.rows
     } catch (error) {
       return error
     }
   }
 
-  fetchDataCustomers().then(deRes => {
-    res.send(deRes)
-  }).catch(err => {
-    res.send(err)
-  })
+  fetchDataCustomers()
+    .then((deRes) => {
+      res.send(deRes)
+    })
+    .catch((err) => {
+      res.send(err)
+    })
 })
 
 app.listen(5000, () => {
