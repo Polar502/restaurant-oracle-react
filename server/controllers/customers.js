@@ -6,10 +6,10 @@ export const getCustomers = (req, res) => {
       const connection = await oracledb.getConnection({
         user: 'C##RESTAURANTDB',
         password: 'hola2022',
-        connectString: '192.168.194.45:1521/xe',
+        connectString: '10.147.20.45:1521/xe',
       })
 
-      const result = await connection.execute('SELECT * FROM employees')
+      const result = await connection.execute('SELECT * FROM customers')
       return result.rows
     } catch (error) {
       return error
