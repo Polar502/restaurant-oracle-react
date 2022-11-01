@@ -9,7 +9,6 @@ const CustomersList = (prompt) => {
       .then((response) => {
         if (response.status === 200) {
           const fetchData = response.data
-          console.log('fetchData' + fetchData)
           setData(fetchData)
         }
       })
@@ -21,7 +20,8 @@ const CustomersList = (prompt) => {
   return (
     <div>
       <h1>CustomersList Component</h1>
-      {data.length > 0 && data.map((item) => <div>{item}</div>)}
+      {data.length > 0 &&
+        data.map((item, index) => <div key={index}>{item}</div>)}
     </div>
   )
 }
