@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Prueba from './prueba'
-import { getUser, getUsers, deleteUser } from '../api'
+import { getUser, getUsers, deleteUser, postUser, putUser } from '../api'
 
 const CustomersList = (prompt) => {
   const [users, setUsers] = useState([])
@@ -41,6 +41,23 @@ const CustomersList = (prompt) => {
     getingUsers()
   }
 
+  const postingUser = async () => {
+    try{
+      await postUser("customers", {id:"502", name:"desconocido el we", phone:"12345678", address:"sahila asi es"})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const putingUser = async () => {
+    try{
+      await putUser("customers", "321", {id:"321", name:"desconocido el we", phone:"12345678", address:"sahila asi es"})
+    } catch (error) {
+      console.log(error)
+    }
+    getingUsers()
+  }
+
 
   //Cosas extra
 
@@ -57,7 +74,7 @@ const CustomersList = (prompt) => {
           <button id={item[0]} onClick={() => mostrarId(index)}>{item}</button>
         </div>)}
       <br></br>
-      <Prueba user={user} eliminarUser={() => deletingUser()} />
+      <Prueba user={user} eliminarUser={() => putingUser()} />
 
     </div>
   )

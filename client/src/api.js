@@ -19,7 +19,7 @@ export const getUsers = async (tipoUser) => {
 };
 
 //nuevos
-export const saveUser = async (tipoUser, newUser) => {
+export const postUser = async (tipoUser, newUser) => {
   const res = await fetch(`${API}/${tipoUser}`, {
     method: "POST",
     headers: {
@@ -31,8 +31,7 @@ export const saveUser = async (tipoUser, newUser) => {
   return await res.json();
 };
 
-export const updateUser = async (tipoUser, id, newUser) => {
-  console.log(id, newUser)
+export const putUser = async (tipoUser, id, newUser) => {
   const res = await fetch(`${API}/${tipoUser}/${id}`, {
     method: "PUT",
     headers: {
