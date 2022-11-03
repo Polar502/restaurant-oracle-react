@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import {
   getEmployees,
+  getEmployee,
   postEmployee,
   putEmployee,
   deleteEmployee,
@@ -11,6 +12,9 @@ const router = Router()
 // ===== Rutas y Metodos para Empleados =====
 // Ver todos los empleados
 router.get('/employees', getEmployees)
+
+// Ver un empleado
+router.get('/employees/:id', getEmployee)
 
 // Guardar un nuevo empleado
 router.post('/employees', postEmployee)

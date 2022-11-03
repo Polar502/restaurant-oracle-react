@@ -27,6 +27,22 @@ export const getCustomers = async (req, res) => {
   }
 }
 
+export const getCustomer = async (req, res) => {
+  const id = req.query.id
+  try {
+    connection = await oracledb.getConnection(config)
+    const result = await connection.execute(
+      'SELECT * FROM customers WHERE c_id = :id',
+      [id]
+    )
+    res.json(result.rows)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    closeConnection()
+  }
+}
+
 export const postCustomer = async (req, res) => {
   const id = req.body.id
   const name = req.body.name
@@ -47,14 +63,16 @@ export const postCustomer = async (req, res) => {
 }
 
 export const putCustomer = async (req, res) => {
-  const body = req.body
+  const name = req.body.name
+  const phone = req.body.phone
+  const address = req.body.address
   const id = req.query.id
   try {
     connection = await oracledb.getConnection(config)
-    await connection.execute('UPDATE customers SET :body WHERE c_id = :id', [
-      body,
-      id,
-    ])
+    await connection.execute(
+      'UPDATE customers SET c_name = :name c_phone = :phone , c_address = :address WHERE c_id = :id',
+      [name, phone, address, id]
+    )
     res.sendStatus(204)
   } catch (error) {
     console.error(error)

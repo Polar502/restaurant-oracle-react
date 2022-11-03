@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import {
   getCustomers,
+  getCustomer,
   postCustomer,
   putCustomer,
   deleteCustomer,
@@ -11,6 +12,9 @@ const router = Router()
 // ===== Rutas y Metodos para Clientes =====
 // Ver todos los clientes
 router.get('/customers', getCustomers)
+
+// Ver un cliente
+router.get('/customers/:id', getCustomer)
 
 // Guardar un nuevo clientes
 router.post('/customers', postCustomer)

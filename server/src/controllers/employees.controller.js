@@ -27,6 +27,22 @@ export const getEmployees = async (req, res) => {
   }
 }
 
+export const getEmployee = async (req, res) => {
+  const id = req.params.id
+  try {
+    connection = await oracledb.getConnection(config)
+    const result = await connection.execute(
+      'SELECT * FROM employees WHERE e_id = :id',
+      [id]
+    )
+    res.json(result.rows)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    closeConnection()
+  }
+}
+
 // Pendiente
 export const postEmployee = async (req, res) => {
   const id = req.body.id
