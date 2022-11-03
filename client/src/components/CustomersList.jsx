@@ -1,48 +1,64 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Prueba from './prueba'
-import { deleteUser } from '../api'
+import { getUser, getUsers, deleteUser } from '../api'
 
 const CustomersList = (prompt) => {
-  const [data, setData] = useState([])
+  const [users, setUsers] = useState([])
   const [user, setUser] = useState([])
+  const [prueba, setPrueba] = useState(['CustomersList Component'])
 
   useEffect(() => {
-    axios('http://localhost:5000/customers')
-      .then((response) => {
-        if (response.status === 200) {
-          const fetchData = response.data
-          setData(fetchData)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    getingUsers()
   }, [])
 
-  const mostrarId = (index) => {
-    setUser(data[index])
+
+  //Funcion para traer a todos los usuarios
+  const getingUsers = async () => {
+    try {
+      const usr = await getUsers('customers');//Aqui se puede remplazar el texto con un PROP
+      setUsers(usr);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //Funcion para traer a un solo usuario
+  const getingUser = async () => {
+    try {
+      const usr = await getUser('customers', user[0]);//Aqui se puede remplazar el texto con un PROP
+      setPrueba(usr[0][1]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  async function eliminarUser() {
-    console.log('Hola')
-     
-      
-      await deleteUser(user[0]);
-      console.log('Hecho')
-    
+  const deletingUser = async () => {
+    try {
+      await deleteUser('customers', user[0]);//Aqui se puede remplazar el texto con un PROP
+    } catch (error) {
+      console.log(error);
+    }
+    getingUsers()
+  }
+
+
+  //Cosas extra
+
+  const mostrarId = (index) => {
+    setUser(users[index])
   }
 
   return (
     <div>
-      <h1>CustomersList Component</h1>
-      {data.length > 0 &&
-        data.map((item, index) => <div key={index}>
+      <h1>{prueba}</h1>
+      {users.length > 0 &&
+        users.map((item, index) => <div key={index}>
           <br></br>
           <button id={item[0]} onClick={() => mostrarId(index)}>{item}</button>
-          </div>)}
-          <br></br>
-      <Prueba user = {user} eliminarUser={() => eliminarUser()}/>
+        </div>)}
+      <br></br>
+      <Prueba user={user} eliminarUser={() => deletingUser()} />
+
     </div>
   )
 }

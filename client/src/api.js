@@ -1,18 +1,22 @@
-const API = "http://localhost:5000/customers";
+const API = "http://localhost:5000";
 
-export const deleteUser = async (id) => {
-  await fetch(`${API}`, {
+export const getUser = async (tipoUser, id) => {
+  const res = await fetch(`${API}/${tipoUser}/${id}`);
+  return await res.json();
+};
+
+export const deleteUser = async (tipoUser, id) => {
+  await fetch(`${API}/${tipoUser}/${id}`, {
     method: "DELETE",
   });
 };
 
-// export const getTasks = async () => {
-//   const res = await fetch(API, {
-//     method: "GET",
-//   });
-
-//   return await res.json();
-// };
+export const getUsers = async (tipoUser) => {
+  const res = await fetch(`${API}/${tipoUser}`, {
+    method: "GET",
+  });
+  return await res.json();
+};
 
 // export const saveTask = async (newTask) => {
 //   const res = await fetch(API, {
