@@ -46,13 +46,14 @@ export const getCustomer = async (req, res) => {
 export const postCustomer = async (req, res) => {
   const id = req.body.id
   const name = req.body.name
-  const address = req.body.id
-  const phone = req.body.id
+  const phone = req.body.phone
+  const address = req.body.address
+
   try {
     connection = await oracledb.getConnection(config)
     await connection.execute(
-      'INSERT INTO customers (c_id, c_name, c_address, c_phone) VALUES ( :id , :name , :address, :phone )',
-      [id, name, address, phone]
+      'INSERT INTO customers (c_id, c_name, c_phone, c_address) VALUES ( :id , :name , :phone , :address )',
+      [id, name, phone, address]
     )
     res.sendStatus(204)
   } catch (error) {
