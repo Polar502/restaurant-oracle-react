@@ -67,19 +67,17 @@ export const putCustomer = async (req, res) => {
   const name = req.body.name
   const phone = req.body.phone
   const address = req.body.address
-  const id = req.query.id
+  const id = req.body.id
   try {
     connection = await oracledb.getConnection(config)
     await connection.execute(
-      'UPDATE customers SET c_name = :name c_phone = :phone , c_address = :address WHERE c_id = :id',
+      'UPDATE customers SET c_name = :name , c_phone = :phone , c_address = :address WHERE c_id = :id',
       [name, phone, address, id]
     )
     res.sendStatus(204)
   } catch (error) {
     console.error(error)
-  } finally {
-    closeConnection()
-  }
+  } 
 }
 
 export const deleteCustomer = async (req, res) => {
