@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.canvasNav {
+  background-color: #323232;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.canvasHeader {
+  background-color: #ffe7d0;
+}
+
+.canvasMain {
+  background-color: #f2f2f2;
+}
+
+.canvasFilterDiv {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 10vh;
+}
+
+
+

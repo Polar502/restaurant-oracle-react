@@ -1,0 +1,21 @@
+.canvasFilter {
+  background-color: #f2f2f2;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 10vh 5vh;
+  align-items: center;
+}
+
+.title{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  justify-self: center;
+}
+
+.filterBtn{
+  justify-self: center;
+  height: 80%;
+  margin: 0;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}

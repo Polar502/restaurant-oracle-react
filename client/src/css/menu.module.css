@@ -1,0 +1,25 @@
+.logo{
+    width: 100%;
+    height: 15vh;
+}
+
+.canvasBtn{
+    width: 100%;
+    height: 10vh;
+    border-top-style: solid;
+    border-radius: 0px;
+    border-width: 0.3vw;
+    border-color: #1b1b1b;
+    font-weight: bold;
+}
+
+.canvasBtn:hover{
+    width: 100%;
+    height: 10vh;
+    border-top-style: solid;
+    border-radius: 0px;
+    border-width: 0.3vw;
+    background-color: #f2f2f2;
+    color: #3f3f3f;
+    font-weight: bold;
+}
