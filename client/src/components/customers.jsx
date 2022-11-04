@@ -5,10 +5,9 @@ import footer from '../css/footer.module.css'
 import Filter from './filter'
 import Search from './search'
 import { getUser, getUsers, deleteUser, postUser, putUser } from '../api'
-import Add from './add'
+import AddCustomers from './AddCustomers'
 
 const Customers = () => {
-
   const [users, setUsers] = useState([])
   const [add, setAdd] = useState()
 
@@ -19,26 +18,27 @@ const Customers = () => {
   //Funcion para traer a todos los empleados
   const getingCustomers = async () => {
     try {
-      const usr = await getUsers('customers');//Aqui se puede remplazar el texto con un PROP
-      setUsers(usr);
+      const usr = await getUsers('customers') //Aqui se puede remplazar el texto con un PROP
+      setUsers(usr)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-
-  const addUser = (usr) => {
-    setAdd(<Add />)
   }
 
+  const addUser = (usr) => {
+    setAdd(<AddCustomers />)
+  }
 
   return (
     <main className={styles.canvasMain}>
       <div className={styles.canvasFilterDiv}>
-        <Search objeto='Cliente' />
-        <Filter objeto='clientes'
-          btn1='Activos'
-          btn2='Inactivos'
-          btn3='Todos' />
+        <Search objeto="Cliente" />
+        <Filter
+          objeto="clientes"
+          btn1="Activos"
+          btn2="Inactivos"
+          btn3="Todos"
+        />
       </div>
       <table className={tables.table}>
         <tbody className={tables.rows}>
@@ -50,7 +50,7 @@ const Customers = () => {
             <td>ESTADO</td>
           </tr>
           {users.length > 0 &&
-            users.map((item, index) =>
+            users.map((item, index) => (
               <tr key={index}>
                 <td className={tables.rows}>{item[0]}</td>
                 <td>{item[1]}</td>
@@ -58,18 +58,19 @@ const Customers = () => {
                 <td>{item[3]}</td>
                 <td>{item[4]}</td>
               </tr>
-            )}
+            ))}
         </tbody>
       </table>
       <div className={footer.canvas}>
         <button className={footer.delete}>Eliminar</button>
         <button className={footer.update}>Actualizar</button>
-        <button onClick={() => addUser('customer')} className={footer.create}>Agregar</button>
+        <button className={footer.create} onClick={() => addUser('customer')}>
+          Agregar
+        </button>
       </div>
       {add}
     </main>
   )
-
 }
 
 export default Customers

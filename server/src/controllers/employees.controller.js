@@ -18,7 +18,9 @@ const closeConnection = async () => {
 export const getEmployees = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
-    const result = await connection.execute('SELECT * FROM view_employees')
+    const result = await connection.execute(
+      'SELECT * FROM view_employees order by ID'
+    )
     res.json(result.rows)
   } catch (error) {
     console.error(error)
@@ -31,7 +33,7 @@ export const getActive = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM view_employees WHERE status LIKE 'ACTIVO'"
+      "SELECT * FROM view_employees WHERE status LIKE 'ACTIVO' order by ID"
     )
     res.json(result.rows)
   } catch (error) {
@@ -45,7 +47,7 @@ export const getInactive = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM view_employees WHERE status LIKE 'INACTIVO'"
+      "SELECT * FROM view_employees WHERE status LIKE 'INACTIVO' order by ID"
     )
     res.json(result.rows)
   } catch (error) {
@@ -73,17 +75,16 @@ export const getEmployee = async (req, res) => {
 
 // Pendiente
 export const postEmployee = async (req, res) => {
-  const id = req.body.id
   const name = req.body.name
-  const address = req.body.phone
   const phone = req.body.address
+  const address = req.body.phone
   const salary = req.body.salary
   const job = req.body.job
   try {
     connection = await oracledb.getConnection(config)
     await connection.execute(
-      'INSERT INTO employees (e_id, e_name, e_phone, e_address, e_salary, j_id) VALUES ( :id, :name, :phone, :address, :salary, :job)',
-      [id, name, phone, address, salary, job]
+      "INSERT INTO employees (e_name, e_phone, e_address, e_salary, e_status, j_id) VALUES ( :name, :phone, :address, :salary, 'ACTIVO', :job)",
+      [name, phone, address, salary, job]
     )
     res.sendStatus(204)
   } catch (error) {

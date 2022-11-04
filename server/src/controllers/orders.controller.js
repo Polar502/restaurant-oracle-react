@@ -18,7 +18,7 @@ const closeConnection = async () => {
 export const getOrders = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
-    const result = await connection.execute('SELECT * FROM view_orders')
+    const result = await connection.execute('SELECT * FROM view_orders order by ID')
     res.json(result.rows)
   } catch (error) {
     console.error(error)
@@ -46,7 +46,7 @@ export const getPending = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM view_orders WHERE status LIKE 'PENDIENTE'"
+      "SELECT * FROM view_orders WHERE status LIKE 'PENDIENTE' order by ID"
     )
     res.json(result.rows)
   } catch (error) {
@@ -60,7 +60,7 @@ export const getReady = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM view_orders WHERE status LIKE 'ENTREGADO'"
+      "SELECT * FROM view_orders WHERE status LIKE 'ENTREGADO' order by ID"
     )
     res.json(result.rows)
   } catch (error) {
@@ -71,17 +71,16 @@ export const getReady = async (req, res) => {
 }
 
 export const postOrder = async (req, res) => {
+
   const id = req.body.id
   const type = req.body.type
-  const status = req.body.status
-  const idC = req.body.idC
-  const idE = req.body.idE
+  const total = req.body.total
 
   try {
     connection = await oracledb.getConnection(config)
     const restult = await connection.execute(
-      'INSERT INTO orders (o_id, o_type, o_status, c_id, e_id) VALUES (:id, :type, :status, :idC, :idE)',
-      [id, type, status, idC, idE]
+      "INSERT INTO orders (c_id, o_type, o_total, o_status) VALUES (:id, :type, :total, 'PENDIENTE')",
+      [ id, type, total]
     )
     res.json(restult)
   } catch (error) {

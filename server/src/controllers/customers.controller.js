@@ -19,7 +19,9 @@ const closeConnection = async () => {
 export const getCustomers = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
-    const result = await connection.execute('SELECT * FROM customers')
+    const result = await connection.execute(
+      'SELECT * FROM customers order by c_id'
+    )
     res.json(result.rows)
   } catch (error) {
     console.error(error)
@@ -33,7 +35,7 @@ export const getActive = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM customers WHERE c_status LIKE 'ACTIVO'"
+      "SELECT * FROM customers WHERE c_status LIKE 'ACTIVO order by c_id'"
     )
     res.json(result.rows)
   } catch (error) {
@@ -48,7 +50,7 @@ export const getInactive = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM customers WHERE c_status LIKE 'INACTIVO'"
+      "SELECT * FROM customers WHERE c_status LIKE 'INACTIVO order by c_id'"
     )
     res.json(result.rows)
   } catch (error) {
@@ -77,7 +79,6 @@ export const getCustomer = async (req, res) => {
 
 // Insertar un cliente
 export const postCustomer = async (req, res) => {
-  const id = req.body.id
   const name = req.body.name
   const phone = req.body.phone
   const address = req.body.address
@@ -85,8 +86,8 @@ export const postCustomer = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     await connection.execute(
-      'INSERT INTO customers (c_id, c_name, c_phone, c_address) VALUES ( :id , :name , :phone , :address )',
-      [id, name, phone, address]
+      "INSERT INTO customers (c_name, c_phone, c_address, c_status) VALUES (:name , :phone , :address , 'ACTIVO')",
+      [name, phone, address]
     )
     res.sendStatus(204)
   } catch (error) {
