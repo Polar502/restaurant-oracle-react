@@ -76,10 +76,11 @@ export const getEmployee = async (req, res) => {
 // Pendiente
 export const postEmployee = async (req, res) => {
   const name = req.body.name
-  const phone = req.body.address
-  const address = req.body.phone
+  const phone = req.body.phone
+  const address = req.body.address
   const salary = req.body.salary
   const job = req.body.job
+  
   try {
     connection = await oracledb.getConnection(config)
     await connection.execute(
