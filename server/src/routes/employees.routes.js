@@ -2,6 +2,8 @@ import { Router } from 'express'
 import {
   getEmployees,
   getEmployee,
+  getActive,
+  getDeactivated,
   postEmployee,
   putEmployee,
   deleteEmployee,
@@ -12,6 +14,12 @@ const router = Router()
 // ===== Rutas y Metodos para Empleados =====
 // Ver todos los empleados
 router.get('/employees', getEmployees)
+
+// Ver trabajadores activos
+router.get('/employees/active', getActive)
+
+// Ver trabajadores inactivos
+router.get('/employees/deactivated', getDeactivated)
 
 // Ver un empleado
 router.get('/employees/:id', getEmployee)
