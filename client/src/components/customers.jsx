@@ -40,6 +40,7 @@ const Customers = () => {
             <td>NOMBRE</td>
             <td>TELEFONO</td>
             <td>DIRECCION</td>
+            <td>ESTADO</td>
           </tr>
           {users.length > 0 &&
             users.map((item, index) =>
@@ -48,6 +49,7 @@ const Customers = () => {
                 <td>{item[1]}</td>
                 <td>{item[2]}</td>
                 <td>{item[3]}</td>
+                <td>{item[4]}</td>
               </tr>
             )}
         </tbody>

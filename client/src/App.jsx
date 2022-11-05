@@ -10,18 +10,23 @@ import Employees from './components/employees'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [main, setMain] = useState(<Employees />)
+  const [main, setMain] = useState(<Customers />)
 
   const changeInterface = (option) => {
     if (option === 'customers') {
       setMain(<Customers />)
-      //document.getElementById('btnCliente').className = menu.canvasBtnActive
+      document.getElementById('btnClientes').className = menu.canvasBtnActive
+      document.getElementById('btnEmpleados').className = menu.canvasBtn
+      document.getElementById('btnOrdenes').className = menu.canvasBtn
     } else if (option === 'employees') {
       setMain(<Employees />)
-      //document.getElementById('btnEmpleado').className = menu.canvasBtnActive
+      document.getElementById('btnClientes').className = menu.canvasBtn
+      document.getElementById('btnEmpleados').className = menu.canvasBtnActive
+      document.getElementById('btnOrdenes').className = menu.canvasBtn
     } else if (option === 'orders') {
       setMain(<Orders />)
-      console.log(document.getElementById('btnOrdenes').className)
+      document.getElementById('btnClientes').className = menu.canvasBtn
+      document.getElementById('btnEmpleados').className = menu.canvasBtn
       document.getElementById('btnOrdenes').className = menu.canvasBtnActive
     }
   }

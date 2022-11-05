@@ -18,6 +18,14 @@ export const getUsers = async (tipoUser) => {
   return await res.json();
 };
 
+export const getOrders = async (order) => {
+  const res = await fetch(`${API}/${order}`, {
+    method: "GET",
+  });
+  return await res.json();
+};
+
+
 //nuevos
 export const postUser = async (tipoUser, newUser) => {
   const res = await fetch(`${API}/${tipoUser}`, {
