@@ -28,11 +28,12 @@ export const getCustomers = async (req, res) => {
   }
 }
 
+// obtener clietnes activos
 export const getActive = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM customers WHERE status LIKE 'ACTIVO'"
+      "SELECT * FROM customers WHERE c_status LIKE 'ACTIVO'"
     )
     res.json(result.rows)
   } catch (error) {
@@ -42,11 +43,12 @@ export const getActive = async (req, res) => {
   }
 }
 
+// Obtener clientes descativos
 export const getDeactivated = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM customers WHERE status LIKE 'DESACTIVO'"
+      "SELECT * FROM customers WHERE c_status LIKE 'DESACTIVO'"
     )
     res.json(result.rows)
   } catch (error) {
