@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from '../css/sections.module.css'
 import tables from '../css/tables.module.css'
+import footer from '../css/footer.module.css'
 import Filter from './filter'
 import Search from './search'
 import { getUser, getUsers, getOrders, deleteUser, postUser, putUser } from '../api'
@@ -53,6 +54,11 @@ const Orders = () => {
             )}
         </tbody>
       </table>
+      <div className={footer.canvas}>
+        <button className={footer.delete}>Eliminar</button>
+        <button className={footer.update}>Actualizar</button>
+        <button className={footer.create}>Agregar</button>
+      </div>
     </main>
   )
 

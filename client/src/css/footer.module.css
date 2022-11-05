@@ -1,0 +1,35 @@
+.canvas{
+    width: 40vw;
+    height: 10vh;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    margin-left: 50vw;
+    align-items: center;
+}
+
+.delete {
+    background-color: transparent;
+    color: #323232;
+    font-weight: bold;
+    height: 7vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.update {
+    background-color: transparent;
+    color: #323232;
+    font-weight: bold;
+    border-style: solid;
+    height: 7vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.create {
+    font-weight: bold;
+    height: 7vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
