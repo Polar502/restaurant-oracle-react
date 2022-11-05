@@ -50,16 +50,17 @@ INSERT INTO customers (c_name, c_address, c_phone, c_status) VALUES ('Sebastian 
 INSERT INTO customers (c_name, c_address, c_phone, c_status) VALUES ('Monica González', 'Avenida Simon Bolivar, Morales, Izabal', 45874565, 'ACTIVO');
 
 
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 200, 2000);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 150, 2001);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 80, 2002);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 75, 2003);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 65, 2004);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 95, 2005);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 175, 2000);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 150, 2001);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 80, 2002);
-INSERT INTO orders (o_status, o_total, c_id) VALUES ('PENDIENTE', 75, 2003);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('PARA LLEVAR', 'PENDIENTE', 200, 2000);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('EN LOCAL', 'PENDIENTE', 150, 2001);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('PARA LLEVAR', 'PENDIENTE', 80, 2002);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('EN LOCAL', 'PENDIENTE', 75, 2003);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('PARA LLEVAR', 'PENDIENTE', 65, 2004);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('PARA LLEVAR', 'PENDIENTE', 95, 2005);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('EN LOCAL', 'PENDIENTE', 175, 2000);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('EN LOCAL', 'PENDIENTE', 150, 2001);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('PARA LLEVAR', 'PENDIENTE', 80, 2002);
+INSERT INTO orders (o_type, o_status, o_total, c_id) VALUES ('PARA LLEVAR', 'PENDIENTE', 75, 2003);
+
 
 -- INSERT INTO order_history (t_id, o_id) VALUES (1, 200);
 -- INSERT INTO order_history (t_id, o_id) VALUES (2, 201);
