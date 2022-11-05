@@ -1,9 +1,9 @@
 import styles from '../css/menu.module.css'
 
-const MenuBtn = ({text}) => {
+const MenuBtn = ({text, action}) => {
 
   return (
-    <button className={styles.canvasBtn}>
+    <button id={`btn${text}`} onClick={() => action()} className={styles.canvasBtn}>
       {text}
     </button>
   )
