@@ -3,7 +3,7 @@ import {
   getCustomers,
   getCustomer,
   getActive,
-  getDeactivated,
+  getInactive,
   postCustomer,
   putCustomer,
   deleteCustomer,
@@ -19,7 +19,7 @@ router.get('/customers', getCustomers)
 router.get('/customers/active', getActive)
 
 // Ver clientes desctivo
-router.get('/customers/deactivated', getDeactivated)
+router.get('/customers/inactive', getInactive)
 
 // Ver un cliente
 router.get('/customers/:id', getCustomer)

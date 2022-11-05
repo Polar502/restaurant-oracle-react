@@ -41,11 +41,11 @@ export const getActive = async (req, res) => {
   }
 }
 
-export const getDeactivated = async (req, res) => {
+export const getInactive = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      "SELECT * FROM view_employees WHERE status LIKE 'DESACTIVO'"
+      "SELECT * FROM view_employees WHERE status LIKE 'INACTIVO'"
     )
     res.json(result.rows)
   } catch (error) {

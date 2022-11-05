@@ -3,7 +3,7 @@ import {
   getEmployees,
   getEmployee,
   getActive,
-  getDeactivated,
+  getInactive,
   postEmployee,
   putEmployee,
   deleteEmployee,
@@ -19,7 +19,7 @@ router.get('/employees', getEmployees)
 router.get('/employees/active', getActive)
 
 // Ver trabajadores inactivos
-router.get('/employees/deactivated', getDeactivated)
+router.get('/employees/inactive', getInactive)
 
 // Ver un empleado
 router.get('/employees/:id', getEmployee)
