@@ -15,6 +15,7 @@ const closeConnection = async () => {
   }
 }
 
+// Obtener todos los clientes
 export const getCustomers = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
@@ -27,8 +28,37 @@ export const getCustomers = async (req, res) => {
   }
 }
 
+export const getActive = async (req, res) => {
+  try {
+    connection = await oracledb.getConnection(config)
+    const result = await connection.execute(
+      "SELECT * FROM customers WHERE status LIKE 'ACTIVO'"
+    )
+    res.json(result.rows)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    closeConnection()
+  }
+}
+
+export const getDeactivated = async (req, res) => {
+  try {
+    connection = await oracledb.getConnection(config)
+    const result = await connection.execute(
+      "SELECT * FROM customers WHERE status LIKE 'DESACTIVO'"
+    )
+    res.json(result.rows)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    closeConnection()
+  }
+}
+
+// Obtener un solo cliente
 export const getCustomer = async (req, res) => {
-  const id = req.query.id
+  const id = req.params.id
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
@@ -43,6 +73,7 @@ export const getCustomer = async (req, res) => {
   }
 }
 
+// Insertar un cliente
 export const postCustomer = async (req, res) => {
   const id = req.body.id
   const name = req.body.name
@@ -63,23 +94,23 @@ export const postCustomer = async (req, res) => {
   }
 }
 
+// Actualizar un cliente
 export const putCustomer = async (req, res) => {
-  const name = req.body.name
-  const phone = req.body.phone
-  const address = req.body.address
-  const id = req.body.id
+  const status = req.body.status
+  const id = req.params.id
   try {
     connection = await oracledb.getConnection(config)
     await connection.execute(
-      'UPDATE customers SET c_name = :name , c_phone = :phone , c_address = :address WHERE c_id = :id',
-      [name, phone, address, id]
+      'UPDATE customers SET c_status = :status WHERE c_id = :id',
+      [status, id]
     )
     res.sendStatus(204)
   } catch (error) {
     console.error(error)
-  } 
+  }
 }
 
+// Eliminar un cliente
 export const deleteCustomer = async (req, res) => {
   const id = req.params.id
   try {

@@ -15,10 +15,10 @@ const closeConnection = async () => {
   }
 }
 
-export const getEmployees = async (req, res) => {
+export const getOrders = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
-    const result = await connection.execute('SELECT * FROM view_employees')
+    const result = await connection.execute('SELECT * FROM view_orders')
     res.json(result.rows)
   } catch (error) {
     console.error(error)
@@ -27,41 +27,12 @@ export const getEmployees = async (req, res) => {
   }
 }
 
-export const getActive = async (req, res) => {
-  try {
-    connection = await oracledb.getConnection(config)
-    const result = await connection.execute(
-      "SELECT * FROM view_employees WHERE status LIKE 'ACTIVO'"
-    )
-    res.json(result.rows)
-  } catch (error) {
-    console.error(error)
-  } finally {
-    closeConnection()
-  }
-}
-
-export const getDeactivated = async (req, res) => {
-  try {
-    connection = await oracledb.getConnection(config)
-    const result = await connection.execute(
-      "SELECT * FROM view_employees WHERE status LIKE 'DESACTIVO'"
-    )
-    res.json(result.rows)
-  } catch (error) {
-    console.error(error)
-  } finally {
-    closeConnection()
-  }
-}
-
-export const getEmployee = async (req, res) => {
+export const getOrder = async (req, res) => {
   const id = req.params.id
   try {
     connection = await oracledb.getConnection(config)
     const result = await connection.execute(
-      'SELECT * FROM view_employees WHERE id = :id',
-      [id]
+      'SELECT * FROM view_orders WHERE id = :id'[id]
     )
     res.json(result.rows)
   } catch (error) {
@@ -71,21 +42,13 @@ export const getEmployee = async (req, res) => {
   }
 }
 
-// Pendiente
-export const postEmployee = async (req, res) => {
-  const id = req.body.id
-  const name = req.body.name
-  const address = req.body.phone
-  const phone = req.body.address
-  const salary = req.body.salary
-  const job = req.body.job
+export const getPending = async (req, res) => {
   try {
     connection = await oracledb.getConnection(config)
-    await connection.execute(
-      'INSERT INTO employees (e_id, e_name, e_phone, e_address, e_salary, j_id) VALUES ( :id, :name, :phone, :address, :salary, :job)',
-      [id, name, phone, address, salary, job]
+    const result = await connection.execute(
+      "SELECT * FROM view_orders WHERE status LIKE 'PENDIENTE'"
     )
-    res.sendStatus(204)
+    res.json(result.rows)
   } catch (error) {
     console.error(error)
   } finally {
@@ -93,13 +56,48 @@ export const postEmployee = async (req, res) => {
   }
 }
 
-export const putEmployee = async (req, res) => {
+export const getReady = async (req, res) => {
+  try {
+    connection = await oracledb.getConnection(config)
+    const result = await connection.execute(
+      "SELECT * FROM view_orders WHERE status LIKE 'ENTREGADO'"
+    )
+    res.json(result.rows)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    closeConnection()
+  }
+}
+
+export const postOrder = async (req, res) => {
+  const id = req.body.id
+  const type = req.body.type
+  const status = req.body.status
+  const idC = req.body.idC
+  const idE = req.body.idE
+
+  try {
+    connection = await oracledb.getConnection(config)
+    const restult = await connection.execute(
+      'INSERT INTO orders (o_id, o_type, o_status, c_id, e_id) VALUES (:id, :type, :status, :idC, :idE)',
+      [id, type, status, idC, idE]
+    )
+    res.json(restult)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    closeConnection()
+  }
+}
+
+export const putOrder = async (req, res) => {
   const status = req.body.status
   const id = req.params.id
   try {
     connection = await oracledb.getConnection(config)
     await connection.execute(
-      'UPDATE view_employees SET status = :status WHERE id = :id',
+      'UPDATE view_orders SET status = :status WHERE id = :id',
       [status, id]
     )
     res.sendStatus(204)
@@ -108,11 +106,11 @@ export const putEmployee = async (req, res) => {
   }
 }
 
-export const deleteEmployee = async (req, res) => {
+export const deleteOrder = async (req, res) => {
   const id = req.params.id
   try {
     connection = await oracledb.getConnection(config)
-    await connection.execute('DELETE FROM view_employees WHERE id = :id', [id])
+    await connection.execute('DELETE FROM view_orders WHERE id = :id', [id])
     res.sendStatus(204)
   } catch (error) {
     console.error(error)
