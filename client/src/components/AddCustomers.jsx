@@ -21,7 +21,7 @@ const AddCustomers = () => {
 
   return (
     <div className={styles.canvas}>
-      <div className={styles.grid}>
+      <div className={styles.gridCustomers}>
         <label htmlFor="" className={styles.title}>NOMBRE</label>
         <label htmlFor="" className={styles.title}>TELEFONO</label>
         <label htmlFor="" className={styles.title}>DIRECCION</label> 

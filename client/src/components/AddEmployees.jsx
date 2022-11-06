@@ -22,7 +22,7 @@ const AddEmployees = () => {
 
   return (
     <div className={styles.canvas}>
-      <div className={styles.grid}>
+      <div className={styles.gridEmployees}>
         <label htmlFor="" className={styles.title}>NOMBRE</label>
         <label htmlFor="" className={styles.title}>TELEFONO</label>
         <label htmlFor="" className={styles.title}>DIRECCION</label> 

@@ -20,7 +20,7 @@ const AddOrders = () => {
 
   return (
     <div className={styles.canvas}>
-      <div className={styles.grid}>
+      <div className={styles.gridOrders}>
         <label htmlFor="" className={styles.title}>ID CLIENTE</label>
         <label htmlFor="" className={styles.title}>TIPO DE ORDEN</label>
         <label htmlFor="" className={styles.title}>TOTAL</label>  

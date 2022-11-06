@@ -7,11 +7,34 @@
     z-index: 10;
 }
 
-.grid {
-    margin: 10vw;
+.gridCustomers {
+    margin: 15vw;
+    margin-bottom: 5vw;
     width: 80vw;
     display: grid;
-    grid-template-columns: 10% 30% 15% 30%;
+    grid-template-columns: 30% 15% 30%;
+    grid-template-rows: 5vh 5vh;
+    align-items: center;
+    justify-items: center;
+}
+
+.gridEmployees {
+    margin: 7vw;
+    margin-bottom: 5vw;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 30% 15% 30% 10% 10%;
+    grid-template-rows: 5vh 5vh;
+    align-items: center;
+    justify-items: center;
+}
+
+.gridOrders {
+    margin: 20vw;
+    margin-bottom: 5vw;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 15% 30% 15%;
     grid-template-rows: 5vh 5vh;
     align-items: center;
     justify-items: center;
@@ -35,17 +58,17 @@
 }
 
 .btn {
-    margin-left: 10vw;
+    margin-left: 35vw;
     height: 5vh;
-    width: 75%;
+    width: 25%;
     background-color: #1b1b1b;
     font-weight: bold;
 }
 
 .btn:hover {
-    margin-left: 10vw;
+    margin-left: 35vw;
     height: 5vh;
-    width: 75%;
+    width: 25%;
     background-color: #f2f2f2;
     color: #1b1b1b;
     font-weight: bold;
